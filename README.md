@@ -1,2 +1,2 @@
 ## Info
-Simulate my own CPU
+Simulate my own CPU.
