@@ -3,12 +3,16 @@ project(MYCPU)
 
 set(CMAKE_CXX_STANDARD 11)
 
+include_directories("${PROJECT_SOURCE_DIR}/include")
+add_subdirectory(include)
+
 set(TESTS
-    test
+    myCPU
 )
 
 foreach(TEST ${TESTS})
-    add_executable(${TEST} EXCLUDE_FROM_ALL ${TEST}.cpp ${TMP})
+    add_executable(${TEST} ${TEST}.cpp)
     target_compile_features(${TEST} PRIVATE cxx_lambdas)  # use C++11
     set_target_properties(${TEST} PROPERTIES COMPILE_FLAGS -g)
+    target_link_libraries(${TEST} include)
 endforeach()
