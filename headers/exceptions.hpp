@@ -1,7 +1,7 @@
-#pragma once
-
 #ifndef EXCEPTIONS
 #define EXCEPTIONS
+
+#pragma once
 
 // list of exceptions
 class MyException{};

@@ -1,3 +1,10 @@
-include_directories ("${PROJECT_SOURCE_DIR}/headers")
+include_directories("${PROJECT_SOURCE_DIR}/headers")
 
-add_library(include std_input_parser.cpp)
+set(LIBS
+    std_input_parser
+    disassembly
+)
+
+foreach(LIB ${LIBS})
+    add_library(${LIB} ${LIB}.cpp)
+endforeach()
