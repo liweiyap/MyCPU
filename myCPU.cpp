@@ -74,5 +74,40 @@ int main(){
         std::cout << "end\n";
     }
     
+    if (strcmp(cmd, "simulate") == 0){
+        int32_t mem[n_instr];
+        
+        for (int idx_instr = 1; idx_instr <= n_instr; ++idx_instr){
+            int32_t instr;
+            std::cin >> std::hex >> instr;
+            
+            try{
+                if (std::cin.fail()){
+                    std::cin.clear();
+                    std::cin.ignore(256, '\n');
+                    throw InvalidInput();
+                }
+            } catch(InvalidInput& err) {
+                std::cerr << "Invalid instruction: please input hexadecimal between 0x00000000 and 0x7fffffff.\n";
+                return 1;
+            }
+            
+            mem[idx_instr-1] = instr;
+        }
+        
+#ifdef DEBUG_MAIN
+        for (int PC = 0; PC < n_instr; ++PC)
+            std::cout << std::hex << mem[PC] << "\n";
+#endif
+        
+        for (int PC = 0; PC < n_instr; ++PC){
+            disassembled_instr d_instr = disassemble(mem[PC]);
+            int opcode = d_instr.opcode;
+            int operand = d_instr.operand;
+            std::cout << "opcode = " << opcode << "\n";
+            std::cout << "operand = " << operand << "\n";
+        }
+    }
+    
     return 0;
 }
