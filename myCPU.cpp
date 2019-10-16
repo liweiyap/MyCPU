@@ -1,6 +1,7 @@
 #include "headers/exceptions.hpp"
 #include "headers/std_input_parser.hpp"
 #include "headers/disassembly.hpp"
+#include <vector>
 
 // uncomment this block if wishing to debug
 /*
@@ -173,7 +174,8 @@ int main(){
     }
     
     if (strcmp(cmd, "simulate") == 0){
-        int32_t mem[n_instr];
+        // dynamic memory allocation because we know n_instr only at run time rather than compile time
+        std::vector<int32_t> mem(n_instr);
         
         for (int idx_instr = 1; idx_instr <= n_instr; ++idx_instr){
             int32_t instr;
