@@ -1,6 +1,7 @@
 #include "headers/exceptions.hpp"
 #include "headers/std_input_parser.hpp"
 #include "headers/disassembly.hpp"
+#include "headers/stack.hpp"
 
 // uncomment this block if wishing to debug
 /*
@@ -14,101 +15,6 @@
 // TODO: exceptions for overflow, underflow, division by zero, memory out of bounds
 // TODO: try uniqStack
 // TODO: try !(std::cin >> n_instr) for n_instr being int
-
-struct Node{
-    Node(int v): value(v), next(0){}
-    Node(int v, Node* n): value(v), next(n){}
-
-    int value;
-    Node* next;
-};
-
-class Stack{
-public:
-    Stack(): top(0), n_nodes(0){}
-    Stack(Node* node): top(node), n_nodes(1){}
-    Stack(int v): top(new Node(v)), n_nodes(1){}
-    Stack(const Stack& s): top(0), n_nodes(0){
-        if (s.top == 0) return;
-        
-        top = new Node(s.top->value);
-        ++n_nodes;
-        
-        Node* prev = top;
-        for (Node* s_node = s.top->next; s_node != 0; s_node = s_node->next){
-            Node* node = new Node(s_node->value);
-            prev->next = node;
-            prev = node;
-            ++n_nodes;
-        }
-    }
-    
-    void push(int v){
-        Node* node = new Node(v, top);
-        top = node;
-        ++n_nodes;
-    }
-    
-    void push(Node* node){
-        node->next = top;
-        top = node;
-        ++n_nodes;
-    }
-    
-    void pop(){
-        assert(!isEmpty() && "Error: pop() failed because stack is empty.");
-        Node* node = top;
-        top = top->next;
-        delete node;
-        --n_nodes;
-    }
-    
-    int peek(){
-        assert(!isEmpty() && "Error: peek() failed because stack is empty.");
-        return top->value;
-    }
-    
-    int size(){
-        return n_nodes;
-    }
-    
-    bool isEmpty(){
-        return top == 0;
-    }
-    
-    void print(){
-        std::cout << "[ ";
-        Node* node = top;
-        while (node != 0){
-            std::cout << node->value;
-            if (node->next != 0) std::cout << " -> ";
-            node = node->next;
-        }
-        std::cout << " ]\n";
-    }
-    
-    Stack& operator=(const Stack& s){
-        if (top != s.top){
-            Stack s_copy = s;
-            std::swap(top, s_copy.top);
-        }
-        return *this;
-    }
-    
-    void clear(){
-        while (!isEmpty()){
-            pop();
-        }
-    }
-    
-    ~Stack(){
-        clear();
-    }
-    
-private:
-    Node* top;
-    int n_nodes;
-};
 
 void hlt(){
     return;

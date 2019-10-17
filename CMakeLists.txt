@@ -16,4 +16,5 @@ foreach(TEST ${TESTS})
     set_target_properties(${TEST} PROPERTIES COMPILE_FLAGS -g)
     target_link_libraries(${TEST} std_input_parser)  # tried foreach() but linking error
     target_link_libraries(${TEST} disassembly)
+    target_link_libraries(${TEST} stack)
 endforeach()
