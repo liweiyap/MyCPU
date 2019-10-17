@@ -1,6 +1,13 @@
 #ifndef DISASSEMBLY
 #define DISASSEMBLY
 
+// uncomment this block if wishing to debug
+/*
+#ifndef DEBUG_DISASSEMBLY
+#define DEBUG_DISASSEMBLY
+#endif
+ */
+
 #pragma once
 
 #include <cmath>

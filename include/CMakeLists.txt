@@ -4,6 +4,8 @@ set(LIBS
     std_input_parser
     disassembly
     stack
+    stack_execute
+    simulation
 )
 
 foreach(LIB ${LIBS})

@@ -1,7 +1,7 @@
 #include "headers/exceptions.hpp"
 #include "headers/std_input_parser.hpp"
 #include "headers/disassembly.hpp"
-#include "headers/stack.hpp"
+#include "headers/simulation.hpp"
 
 // uncomment this block if wishing to debug
 /*
@@ -15,83 +15,6 @@
 // TODO: exceptions for overflow, underflow, division by zero, memory out of bounds
 // TODO: try uniqStack
 // TODO: try !(std::cin >> n_instr) for n_instr being int
-
-void hlt(){
-    return;
-}
-
-void out(Stack& S, int& PC){
-    int v = S.peek();
-    S.pop();
-    std::cout << std::dec << v;
-    ++PC;
-}
-
-void outchar(Stack& S, int& PC){
-    char v = static_cast<char>(S.peek());
-    S.pop();
-    std::cout << v;
-    ++PC;
-}
-
-void add(Stack& S, int& PC){
-    int r = S.peek();
-    S.pop();
-    int l = S.peek();
-    S.pop();
-    S.push(l+r);
-    ++PC;
-}
-
-void sub(Stack& S, int& PC){
-    int r = S.peek();
-    S.pop();
-    int l = S.peek();
-    S.pop();
-    S.push(l-r);
-    ++PC;
-}
-
-void dup(Stack& S, int& PC){
-    int r = S.peek();
-    S.push(r);
-    ++PC;
-}
-
-void load(int32_t* mem, Stack& S, int& PC){
-    int m = S.peek();
-    S.pop();
-    int32_t r = mem[m];
-    S.push(r);
-    ++PC;
-}
-
-void store(int32_t* mem, Stack& S, int& PC){
-    int m = S.peek();
-    S.pop();
-    int32_t v = static_cast<int32_t>(S.peek());
-    S.pop();
-    mem[m] = v;
-    ++PC;
-}
-
-void const_c(const int c, Stack& S, int& PC){
-    S.push(c);
-    ++PC;
-}
-
-void jmp_c(const int c, int& PC){
-    PC = c;
-}
-
-void jeq_c(const int c, Stack& S, int& PC){
-    int r = S.peek();
-    S.pop();
-    int l = S.peek();
-    S.pop();
-    if (l == r) PC = c;
-    else ++PC;
-}
 
 int main(){
     // input first command as either "disassemble" or "simulate"
@@ -185,35 +108,7 @@ int main(){
             std::cout << std::hex << mem[PC] << "\n";
 #endif
         
-        Stack S;
-        int PC = 0;
-        int opcode;
-        int operand;
-        
-        while (opcode != 1){
-            disassembled_instr d_instr = disassemble(mem[PC]);
-            opcode = d_instr.opcode;
-            operand = d_instr.operand;
-#ifdef DEBUG_MAIN
-            std::cout << "opcode = " << opcode << "\n";
-            std::cout << "operand = " << operand << "\n";
-#endif
-            if (opcode == 1) hlt();
-            else if (opcode == 12) out(S, PC);
-            else if (opcode == 13) outchar(S, PC);
-            else if (opcode == 20) add(S, PC);
-            else if (opcode == 21) sub(S, PC);
-            else if (opcode == 26) dup(S, PC);
-            else if (opcode == 30) load(mem, S, PC);
-            else if (opcode == 31) store(mem, S, PC);
-            else if (opcode == 32) const_c(operand, S, PC);
-            else if (opcode == 40) jmp_c(operand, PC);
-            else if (opcode == 41) jeq_c(operand, S, PC);
-//            S.print();
-//            std::cout << "PC = " << PC << "\n";
-        }
-        
-        std::cout << "\n";
+        simulate(mem);
         
 #ifdef DEBUG_MAIN
         Stack s1(6);

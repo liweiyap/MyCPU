@@ -1,10 +1,3 @@
-// uncomment this block if wishing to debug
-/*
-#ifndef DEBUG_DISASSEMBLY
-#define DEBUG_DISASSEMBLY
-#endif
- */
-
 #include "disassembly.hpp"
 
 /*

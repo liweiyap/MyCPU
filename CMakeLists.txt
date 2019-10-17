@@ -17,4 +17,6 @@ foreach(TEST ${TESTS})
     target_link_libraries(${TEST} std_input_parser)  # tried foreach() but linking error
     target_link_libraries(${TEST} disassembly)
     target_link_libraries(${TEST} stack)
+    target_link_libraries(${TEST} stack_execute)
+    target_link_libraries(${TEST} simulation)
 endforeach()
