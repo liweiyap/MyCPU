@@ -1,7 +1,6 @@
 #include "headers/exceptions.hpp"
 #include "headers/std_input_parser.hpp"
 #include "headers/disassembly.hpp"
-#include <vector>
 
 // uncomment this block if wishing to debug
 /*
@@ -12,6 +11,9 @@
 
 // TODO: fetch, decode, execute for simulator
 // TODO: tests for disassembly input etc, stack, simulation input etc
+// TODO: exceptions for overflow, underflow, division by zero, memory out of bounds
+// TODO: try uniqStack
+// TODO: try !(std::cin >> n_instr) for n_instr being int
 
 struct Node{
     Node(int v): value(v), next(0){}
@@ -108,6 +110,83 @@ private:
     int n_nodes;
 };
 
+void hlt(){
+    return;
+}
+
+void out(Stack& S, int& PC){
+    int v = S.peek();
+    S.pop();
+    std::cout << std::dec << v;
+    ++PC;
+}
+
+void outchar(Stack& S, int& PC){
+    char v = static_cast<char>(S.peek());
+    S.pop();
+    std::cout << v;
+    ++PC;
+}
+
+void add(Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    int l = S.peek();
+    S.pop();
+    S.push(l+r);
+    ++PC;
+}
+
+void sub(Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    int l = S.peek();
+    S.pop();
+    S.push(l-r);
+    ++PC;
+}
+
+void dup(Stack& S, int& PC){
+    int r = S.peek();
+    S.push(r);
+    ++PC;
+}
+
+void load(int32_t* mem, Stack& S, int& PC){
+    int m = S.peek();
+    S.pop();
+    int32_t r = mem[m];
+    S.push(r);
+    ++PC;
+}
+
+void store(int32_t* mem, Stack& S, int& PC){
+    int m = S.peek();
+    S.pop();
+    int32_t v = static_cast<int32_t>(S.peek());
+    S.pop();
+    mem[m] = v;
+    ++PC;
+}
+
+void const_c(const int c, Stack& S, int& PC){
+    S.push(c);
+    ++PC;
+}
+
+void jmp_c(const int c, int& PC){
+    PC = c;
+}
+
+void jeq_c(const int c, Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    int l = S.peek();
+    S.pop();
+    if (l == r) PC = c;
+    else ++PC;
+}
+
 int main(){
     // input first command as either "disassemble" or "simulate"
     char cmd[12];
@@ -175,7 +254,7 @@ int main(){
     
     if (strcmp(cmd, "simulate") == 0){
         // dynamic memory allocation because we know n_instr only at run time rather than compile time
-        std::vector<int32_t> mem(n_instr);
+        int32_t* mem = new int32_t[n_instr];
         
         for (int idx_instr = 1; idx_instr <= n_instr; ++idx_instr){
             int32_t instr;
@@ -184,7 +263,7 @@ int main(){
             try{
                 if (std::cin.fail()){
                     std::cin.clear();
-                    std::cin.ignore(256, '\n');
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                     throw InvalidInput();
                 }
             } catch(InvalidInput& err) {
@@ -200,13 +279,35 @@ int main(){
             std::cout << std::hex << mem[PC] << "\n";
 #endif
         
-        for (int PC = 0; PC < n_instr; ++PC){
+        Stack S;
+        int PC = 0;
+        int opcode;
+        int operand;
+        
+        while (opcode != 1){
             disassembled_instr d_instr = disassemble(mem[PC]);
-            int opcode = d_instr.opcode;
-            int operand = d_instr.operand;
+            opcode = d_instr.opcode;
+            operand = d_instr.operand;
+#ifdef DEBUG_MAIN
             std::cout << "opcode = " << opcode << "\n";
             std::cout << "operand = " << operand << "\n";
+#endif
+            if (opcode == 1) hlt();
+            else if (opcode == 12) out(S, PC);
+            else if (opcode == 13) outchar(S, PC);
+            else if (opcode == 20) add(S, PC);
+            else if (opcode == 21) sub(S, PC);
+            else if (opcode == 26) dup(S, PC);
+            else if (opcode == 30) load(mem, S, PC);
+            else if (opcode == 31) store(mem, S, PC);
+            else if (opcode == 32) const_c(operand, S, PC);
+            else if (opcode == 40) jmp_c(operand, PC);
+            else if (opcode == 41) jeq_c(operand, S, PC);
+//            S.print();
+//            std::cout << "PC = " << PC << "\n";
         }
+        
+        std::cout << "\n";
         
 #ifdef DEBUG_MAIN
         Stack s1(6);
@@ -218,6 +319,16 @@ int main(){
         s1.pop(); s1.print();
         s2.pop(); s2.print();
 #endif
+        
+//        std::shared_ptr<Stack> s1 = std::make_shared<Stack>(6);
+//        s1->push(1); s1->push(2); s1->push(3);
+//        s1->print();
+//        std::shared_ptr<Stack> s2 = std::make_shared<Stack>();
+//        s2 = s1;
+//        s1->pop(); s1->print();
+//        s2->pop(); s2->print();
+        
+        delete[] mem;
     }
     
     return 0;
