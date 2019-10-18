@@ -4,6 +4,7 @@
 #pragma once
 
 #include "stack.hpp"
+#include "exceptions.hpp"
 
 void hlt();
 

@@ -21,26 +21,81 @@ void simulate(int32_t* mem){
         std::cout << "opcode = " << opcode << "\n";
         std::cout << "operand = " << operand << "\n";
 #endif
-        if (opcode == 1) hlt();
-        else if (opcode == 10) in(S, PC);
-        else if (opcode == 11) inchar(S, PC);
-        else if (opcode == 12) out(S, PC);
-        else if (opcode == 13) outchar(S, PC);
-        else if (opcode == 20) add(S, PC);
-        else if (opcode == 21) sub(S, PC);
-        else if (opcode == 22) mul(S, PC);
-        else if (opcode == 23) div(S, PC);
-        else if (opcode == 24) mod(S, PC);
-        else if (opcode == 25) neg(S, PC);
-        else if (opcode == 26) dup(S, PC);
-        else if (opcode == 30) load(mem, S, PC);
-        else if (opcode == 31) store(mem, S, PC);
-        else if (opcode == 32) const_c(operand, S, PC);
-        else if (opcode == 40) jmp_c(operand, PC);
-        else if (opcode == 41) jeq_c(operand, S, PC);
-        else if (opcode == 42) jne_c(operand, S, PC);
-        else if (opcode == 43) jls_c(operand, S, PC);
-        else if (opcode == 44) jle_c(operand, S, PC);
+        std::string str_instr;
+        try{
+            if (opcode == 1){
+                str_instr = "hlt()";
+                hlt();
+            } else if (opcode == 10){
+                str_instr = "in()";
+                in(S, PC);
+            } else if (opcode == 11){
+                str_instr = "inchar()";
+                inchar(S, PC);
+            } else if (opcode == 12){
+                str_instr = "out()";
+                out(S, PC);
+            } else if (opcode == 13){
+                str_instr = "outchar()";
+                outchar(S, PC);
+            } else if (opcode == 20){
+                str_instr = "add()";
+                add(S, PC);
+            } else if (opcode == 21){
+                str_instr = "sub()";
+                sub(S, PC);
+            } else if (opcode == 22){
+                str_instr = "mul()";
+                mul(S, PC);
+            } else if (opcode == 23){
+                str_instr = "div()";
+                div(S, PC);
+            } else if (opcode == 24){
+                str_instr = "mod()";
+                mod(S, PC);
+            } else if (opcode == 25){
+                str_instr = "neg()";
+                neg(S, PC);
+            } else if (opcode == 26){
+                str_instr = "dup()";
+                dup(S, PC);
+            } else if (opcode == 30){
+                str_instr = "load()";
+                load(mem, S, PC);
+            } else if (opcode == 31){
+                str_instr = "store()";
+                store(mem, S, PC);
+            } else if (opcode == 32){
+                str_instr = "const_c()";
+                const_c(operand, S, PC);
+            } else if (opcode == 40){
+                str_instr = "jmp_c()";
+                jmp_c(operand, PC);
+            } else if (opcode == 41){
+                str_instr = "jeq_c()";
+                jeq_c(operand, S, PC);
+            } else if (opcode == 42){
+                str_instr = "jne_c()";
+                jne_c(operand, S, PC);
+            } else if (opcode == 43){
+                str_instr = "jls_c()";
+                jls_c(operand, S, PC);
+            } else if (opcode == 44){
+                str_instr = "jle_c()";
+                jle_c(operand, S, PC);
+            } else{
+                str_instr = "data";
+                ++PC;
+            }
+        } catch(Overflow& error){
+            std::cerr << "Error: " << str_instr << " failed because result was greater than maximum integer value that can be stored.\n";
+            return;
+        } catch(Underflow& error){
+            std::cerr << "Error: " << str_instr << " failed because result was smaller than minimum integer value that can be stored.\n";
+            return;
+        } catch(DivisionByZero& error){
+            std::cerr << "Error: " << str_instr << " failed because denominator was zero, so result was undefined.\n";
+        }
 #ifdef DEBUG_SIMULATION
         S.print();
         std::cout << "PC = " << PC << "\n";

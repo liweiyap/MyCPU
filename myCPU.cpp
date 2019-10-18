@@ -16,6 +16,7 @@
 // TODO: try uniqStack
 // TODO: try !(std::cin >> n_instr) for n_instr being int
 // TODO: cout << "Input mode", including for in and inchar
+// TODO: } end fn name in main
 
 int main(){
     // input first command as either "disassemble" or "simulate"
@@ -87,22 +88,37 @@ int main(){
         int32_t* mem = new int32_t[n_instr];
         
         for (int idx_instr = 1; idx_instr <= n_instr; ++idx_instr){
-            int32_t instr;
-            std::cin >> std::hex >> instr;
-            
+            long instr;
             try{
-                if (std::cin.fail()){
+                /* convert to long first to accept negative hexadecimal numbers, since we cannot input negative number right away into signed integer type int32_t
+                 */
+                if (!(std::cin >> std::hex >> instr)){
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                     throw InvalidInput();
                 }
+                
+                if (instr > std::numeric_limits<int>::max()){
+                    throw Overflow();
+                }
+                
+                if (instr < std::numeric_limits<int>::min()){
+                    throw Underflow();
+                }
+                
             } catch(InvalidInput& err) {
-                std::cerr << "Invalid instruction: please input hexadecimal between 0x00000000 and 0x7fffffff.\n";
+                std::cerr << "Invalid instruction: please input hexadecimal.\n";
+                return 1;
+            } catch(Overflow& error){
+                std::cerr << "Invalid instruction (integer overflow): please input hexadecimal between 0x00000000 and 0xffffffff.\n";
+                return 1;
+            } catch(Underflow& error){
+                std::cerr << "Invalid instruction (integer underflow): please input hexadecimal between 0x00000000 and 0xffffffff.\n";
                 return 1;
             }
             
-            mem[idx_instr-1] = instr;
-        }
+            mem[idx_instr-1] = static_cast<int32_t>(instr);
+        }  // end loop for inputting instr into mem array
         
 #ifdef DEBUG_MAIN
         for (int PC = 0; PC < n_instr; ++PC)
@@ -131,7 +147,7 @@ int main(){
 //        s2->pop(); s2->print();
         
         delete[] mem;
-    }
+    }  // end if statement for simulate
     
     return 0;
 }

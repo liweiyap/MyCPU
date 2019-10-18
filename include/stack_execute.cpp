@@ -37,6 +37,8 @@ void add(Stack& S, int& PC){
     S.pop();
     int l = S.peek();
     S.pop();
+    if (r > 0 && l > std::numeric_limits<int>::max() - r) throw Overflow();
+    if (r < 0 && l < std::numeric_limits<int>::min() - r) throw Underflow();
     S.push(l+r);
     ++PC;
 }
@@ -46,6 +48,8 @@ void sub(Stack& S, int& PC){
     S.pop();
     int l = S.peek();
     S.pop();
+    if (r < 0 && l > std::numeric_limits<int>::max() + r) throw Overflow();
+    if (r > 0 && l < std::numeric_limits<int>::min() + r) throw Underflow();
     S.push(l-r);
     ++PC;
 }
@@ -55,6 +59,11 @@ void mul(Stack& S, int& PC){
     S.pop();
     int l = S.peek();
     S.pop();
+    // Since INT_MAX = 2^31-1 and INT_MIN = -2^31, thus -INT_MIN > INT_MAX.
+    if (l == -1 && r == std::numeric_limits<int>::min()) throw Overflow();
+    if (r == -1 && l == std::numeric_limits<int>::min()) throw Overflow();
+    if (r != 0 && l > std::numeric_limits<int>::max() / r) throw Overflow();
+    if (r != 0 && l < std::numeric_limits<int>::min() / r) throw Underflow();
     S.push(l*r);
     ++PC;
 }
@@ -64,6 +73,9 @@ void div(Stack& S, int& PC){
     S.pop();
     int l = S.peek();
     S.pop();
+    // Since INT_MAX = 2^31-1 and INT_MIN = -2^31, thus -INT_MIN > INT_MAX.
+    if (r == -1 && l == std::numeric_limits<int>::min()) throw Overflow();
+    if (r == 0) throw DivisionByZero();
     S.push(l/r);
     ++PC;
 }
@@ -73,6 +85,9 @@ void mod(Stack& S, int& PC){
     S.pop();
     int l = S.peek();
     S.pop();
+    // Since INT_MAX = 2^31-1 and INT_MIN = -2^31, thus -INT_MIN > INT_MAX.
+    if (r == -1 && l == std::numeric_limits<int>::min()) throw Overflow();
+    if (r == 0) throw DivisionByZero();
     S.push(l%r);
     ++PC;
 }
@@ -80,6 +95,8 @@ void mod(Stack& S, int& PC){
 void neg(Stack& S, int& PC){
     int r = S.peek();
     S.pop();
+    // Since INT_MAX = 2^31-1 and INT_MIN = -2^31, thus -INT_MIN > INT_MAX.
+    if (r == std::numeric_limits<int>::min()) throw Overflow();
     S.push(-r);
     ++PC;
 }
