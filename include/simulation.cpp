@@ -22,16 +22,25 @@ void simulate(int32_t* mem){
         std::cout << "operand = " << operand << "\n";
 #endif
         if (opcode == 1) hlt();
+        else if (opcode == 10) in(S, PC);
+        else if (opcode == 11) inchar(S, PC);
         else if (opcode == 12) out(S, PC);
         else if (opcode == 13) outchar(S, PC);
         else if (opcode == 20) add(S, PC);
         else if (opcode == 21) sub(S, PC);
+        else if (opcode == 22) mul(S, PC);
+        else if (opcode == 23) div(S, PC);
+        else if (opcode == 24) mod(S, PC);
+        else if (opcode == 25) neg(S, PC);
         else if (opcode == 26) dup(S, PC);
         else if (opcode == 30) load(mem, S, PC);
         else if (opcode == 31) store(mem, S, PC);
         else if (opcode == 32) const_c(operand, S, PC);
         else if (opcode == 40) jmp_c(operand, PC);
         else if (opcode == 41) jeq_c(operand, S, PC);
+        else if (opcode == 42) jne_c(operand, S, PC);
+        else if (opcode == 43) jls_c(operand, S, PC);
+        else if (opcode == 44) jle_c(operand, S, PC);
 #ifdef DEBUG_SIMULATION
         S.print();
         std::cout << "PC = " << PC << "\n";
@@ -39,4 +48,5 @@ void simulate(int32_t* mem){
     }
     
     std::cout << "\n";
+    return;
 }

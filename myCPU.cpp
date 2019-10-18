@@ -15,6 +15,7 @@
 // TODO: exceptions for overflow, underflow, division by zero, memory out of bounds
 // TODO: try uniqStack
 // TODO: try !(std::cin >> n_instr) for n_instr being int
+// TODO: cout << "Input mode", including for in and inchar
 
 int main(){
     // input first command as either "disassemble" or "simulate"
@@ -81,7 +82,7 @@ int main(){
         std::cout << "end\n";
     }
     
-    if (strcmp(cmd, "simulate") == 0){
+    if (strcmp(cmd, "simulate") == 0 && n_instr != 0){
         // dynamic memory allocation because we know n_instr only at run time rather than compile time
         int32_t* mem = new int32_t[n_instr];
         

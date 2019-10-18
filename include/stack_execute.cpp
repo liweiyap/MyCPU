@@ -4,6 +4,20 @@ void hlt(){
     return;
 }
 
+void in(Stack& S, int& PC){
+    int v;
+    std::cin >> std::dec >> v;
+    S.push(v);
+    ++PC;
+}
+
+void inchar(Stack& S, int& PC){
+    char v;
+    std::cin >> std::dec >> v;
+    S.push(int(v));
+    ++PC;
+}
+
 void out(Stack& S, int& PC){
     int v = S.peek();
     S.pop();
@@ -33,6 +47,40 @@ void sub(Stack& S, int& PC){
     int l = S.peek();
     S.pop();
     S.push(l-r);
+    ++PC;
+}
+
+void mul(Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    int l = S.peek();
+    S.pop();
+    S.push(l*r);
+    ++PC;
+}
+
+void div(Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    int l = S.peek();
+    S.pop();
+    S.push(l/r);
+    ++PC;
+}
+
+void mod(Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    int l = S.peek();
+    S.pop();
+    S.push(l%r);
+    ++PC;
+}
+
+void neg(Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    S.push(-r);
     ++PC;
 }
 
@@ -74,5 +122,32 @@ void jeq_c(const int c, Stack& S, int& PC){
     int l = S.peek();
     S.pop();
     if (l == r) PC = c;
+    else ++PC;
+}
+
+void jne_c(const int c, Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    int l = S.peek();
+    S.pop();
+    if (l != r) PC = c;
+    else ++PC;
+}
+
+void jls_c(const int c, Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    int l = S.peek();
+    S.pop();
+    if (l < r) PC = c;
+    else ++PC;
+}
+
+void jle_c(const int c, Stack& S, int& PC){
+    int r = S.peek();
+    S.pop();
+    int l = S.peek();
+    S.pop();
+    if (l <= r) PC = c;
     else ++PC;
 }
