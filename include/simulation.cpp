@@ -5,7 +5,9 @@
 #endif
  */
 
+#ifndef SIMULATION
 #include "simulation.hpp"
+#endif
 
 void simulate(int32_t* mem){
     Stack S;

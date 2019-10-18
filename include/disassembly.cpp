@@ -1,4 +1,6 @@
+#ifndef DISASSEMBLY
 #include "disassembly.hpp"
+#endif
 
 /*
  Each hexadecimal instruction is 8 x 4 = 32 bits long (each digit in a hexadecimal being a hex-nibble).
@@ -11,7 +13,7 @@
  this twice because the remainder after two rounds of division is already
  the operand, with the opcode also extracted during division.
  */
-disassembled_instr disassemble(int instr){
+inline disassembled_instr disassemble(int instr){
     int idx_hex = 7;
     int opcode = 0;
     

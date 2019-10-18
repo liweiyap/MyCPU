@@ -5,8 +5,13 @@
 #endif
  */
 
+#ifndef STD_INPUT_PARSER
 #include "std_input_parser.hpp"
+#endif
+
+#ifndef EXCEPTIONS
 #include "exceptions.hpp"
+#endif
 
 int ConvertCharToPositiveInt(const char text[]){
     int number = 0;

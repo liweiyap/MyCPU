@@ -1,10 +1,14 @@
 #ifndef STACK_EXECUTE
 #define STACK_EXECUTE
-
 #pragma once
 
+#ifndef STACK_H
 #include "stack.hpp"
+#endif
+
+#ifndef EXCEPTIONS
 #include "exceptions.hpp"
+#endif
 
 void hlt();
 

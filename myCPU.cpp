@@ -98,22 +98,15 @@ int main(){
                     throw InvalidInput();
                 }
                 
-                if (instr > std::numeric_limits<int>::max()){
+                if (instr > static_cast<long>(std::numeric_limits<int>::max()) * 2 + 1){
                     throw Overflow();
                 }
-                
-                if (instr < std::numeric_limits<int>::min()){
-                    throw Underflow();
-                }
-                
+
             } catch(InvalidInput& err) {
                 std::cerr << "Invalid instruction: please input hexadecimal.\n";
                 return 1;
             } catch(Overflow& error){
                 std::cerr << "Invalid instruction (integer overflow): please input hexadecimal between 0x00000000 and 0xffffffff.\n";
-                return 1;
-            } catch(Underflow& error){
-                std::cerr << "Invalid instruction (integer underflow): please input hexadecimal between 0x00000000 and 0xffffffff.\n";
                 return 1;
             }
             

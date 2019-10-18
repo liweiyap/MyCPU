@@ -1,4 +1,6 @@
+#ifndef STACK_EXECUTE
 #include "stack_execute.hpp"
+#endif
 
 void hlt(){
     return;

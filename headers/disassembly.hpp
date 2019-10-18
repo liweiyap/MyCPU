@@ -1,5 +1,6 @@
 #ifndef DISASSEMBLY
 #define DISASSEMBLY
+#pragma once
 
 // uncomment this block if wishing to debug
 /*
@@ -7,8 +8,6 @@
 #define DEBUG_DISASSEMBLY
 #endif
  */
-
-#pragma once
 
 #include <cmath>
 #include <iostream>

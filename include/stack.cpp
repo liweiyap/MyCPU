@@ -1,10 +1,12 @@
+#ifndef STACK_H
 #include "stack.hpp"
+#endif
 
 // Constructor for stand-alone Node
-Node::Node(int v): value(v), next(0){}
+inline Node::Node(int v): value(v), next(0){}
 
 // Constructor for Node object that points to another Node
-Node::Node(int v, Node* n): value(v), next(n){}
+inline Node::Node(int v, Node* n): value(v), next(n){}
 
 // Default constructor for empty Stack
 Stack::Stack(): top(0), n_nodes(0){}
@@ -67,7 +69,7 @@ int Stack::size(){
 }
 
 // If true, Stack contains 0 Nodes. If false, Stack contains Nodes.
-bool Stack::isEmpty(){
+inline bool Stack::isEmpty(){
     return !top;  // return top == 0
 }
 
