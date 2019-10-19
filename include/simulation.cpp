@@ -92,6 +92,9 @@ void simulate(int32_t* mem, const int n_instr){
             
             if (PC >= n_instr) throw MemOutOfBounds();
             
+        } catch(InvalidInput& error){
+            std::cerr << "Error: " << str_instr << " failed because of invalid input. The number of instructions should be an integer.\n";
+            return;
         } catch(Overflow& error){
             std::cerr << "Error: " << str_instr << " failed because result was greater than maximum integer value that can be stored.\n";
             return;

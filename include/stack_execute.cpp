@@ -6,9 +6,17 @@ void hlt(){
     return;
 }
 
-void in(Stack& S, int& PC){
+void in(Stack& S, int& PC){    
+    char tmp_v[12];
+    std::cin >> std::dec >> tmp_v;
     int v;
-    std::cin >> std::dec >> v;
+    if (tmp_v[0] == '-'){
+        auto neg_v = std::remove(std::begin(tmp_v), std::begin(tmp_v) + 2, '-');
+        v = -(ConvertCharToPositiveInt(neg_v));
+    } else{
+        v = ConvertCharToPositiveInt(tmp_v);
+    }
+    
     S.push(v);
     ++PC;
 }

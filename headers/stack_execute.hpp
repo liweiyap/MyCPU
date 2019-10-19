@@ -10,6 +10,10 @@
 #include "exceptions.hpp"
 #endif
 
+#ifndef STD_INPUT_PARSER
+#include "std_input_parser.hpp"
+#endif
+
 void hlt();
 
 void in(Stack& S, int& PC);

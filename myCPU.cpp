@@ -23,9 +23,8 @@
 
 // TODO: fetch, decode, execute for simulator
 // TODO: tests for disassembly input etc, stack, simulation input etc
-// TODO: exceptions for overflow, underflow, division by zero, memory out of bounds
 // TODO: try uniqStack
-// TODO: try !(std::cin >> n_instr) for n_instr being int
+// TODO: rewrite inputs for disassembly mode
 // TODO: cout << "Input mode", including for in and inchar
 // TODO: } end fn name in main
 
@@ -58,6 +57,9 @@ int main(){
         n_instr = ConvertCharToPositiveInt(tmp_n_instr);
     } catch(InvalidInput& err) {
         std::cerr << "Invalid input: please try again. The number of instructions should be a positive integer.\n";
+        return 1;
+    } catch(Overflow& err) {
+        std::cerr << "Invalid input: please try again. The number of instructions should be an integer between 0 and (2^31)-1 inclusive.\n";
         return 1;
     }
     
@@ -109,6 +111,7 @@ int main(){
                     throw InvalidInput();
                 }
                 
+                // 2^32 - 1 = (2^31 - 1) * 2 + 1
                 if (instr > static_cast<long>(std::numeric_limits<int>::max()) * 2 + 1){
                     throw Overflow();
                 }

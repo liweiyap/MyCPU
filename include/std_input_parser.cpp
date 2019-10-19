@@ -19,7 +19,10 @@ int ConvertCharToPositiveInt(const char text[]){
     for (int i = 0; i < strlen(text); ++i){
         if (!isdigit(text[i])) throw InvalidInput();
         
+        if (number > std::numeric_limits<int>::max() / 10) throw Overflow();
         number *= 10;
+        
+        if (number > std::numeric_limits<int>::max() - (text[i] - '0')) throw Overflow();
         number += (text[i] - '0');
     }
     
