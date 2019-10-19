@@ -10,6 +10,6 @@
 #include "stack_execute.hpp"
 #endif
 
-void simulate(int32_t* mem);
+void simulate(int32_t* mem, const int n_instr);
 
 #endif

@@ -10,11 +10,11 @@
  that points either to NULL or the next Node in the same Stack.
  */
 struct Node{
-    // Constructor for stand-alone Node
-    Node(int v);
+    // Inline constructor for stand-alone Node
+    Node(int v): value(v), next(0){}
     
-    // Constructor for Node object that points to another Node
-    Node(int v, Node* n);
+    // Inline constructor for Node object that points to another Node
+    Node(int v, Node* n): value(v), next(n){}
 
     int value;
     Node* next;

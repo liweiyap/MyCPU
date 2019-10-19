@@ -1,14 +1,25 @@
-#include "headers/exceptions.hpp"
-#include "headers/std_input_parser.hpp"
-#include "headers/disassembly.hpp"
-#include "headers/simulation.hpp"
-
 // uncomment this block if wishing to debug
 /*
 #ifndef DEBUG_MAIN
 #define DEBUG_MAIN
 #endif
  */
+
+#ifndef EXCEPTIONS
+#include "headers/exceptions.hpp"
+#endif
+
+#ifndef STD_INPUT_PARSER
+#include "headers/std_input_parser.hpp"
+#endif
+
+#ifndef DISASSEMBLY
+#include "headers/disassembly.hpp"
+#endif
+
+#ifndef SIMULATION
+#include "headers/simulation.hpp"
+#endif
 
 // TODO: fetch, decode, execute for simulator
 // TODO: tests for disassembly input etc, stack, simulation input etc
@@ -118,7 +129,7 @@ int main(){
             std::cout << std::hex << mem[PC] << "\n";
 #endif
         
-        simulate(mem);
+        simulate(mem, n_instr);
         
 #ifdef DEBUG_MAIN
         Stack s1(6);

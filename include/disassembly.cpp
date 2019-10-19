@@ -13,7 +13,7 @@
  this twice because the remainder after two rounds of division is already
  the operand, with the opcode also extracted during division.
  */
-inline disassembled_instr disassemble(int instr){
+disassembled_instr disassemble(int instr){
     int idx_hex = 7;
     int opcode = 0;
     

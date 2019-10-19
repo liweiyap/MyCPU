@@ -9,7 +9,7 @@
 #include "simulation.hpp"
 #endif
 
-void simulate(int32_t* mem){
+void simulate(int32_t* mem, const int n_instr){
     Stack S;
     int PC = 0;
     int opcode;
@@ -89,6 +89,9 @@ void simulate(int32_t* mem){
                 str_instr = "data";
                 ++PC;
             }
+            
+            if (PC >= n_instr) throw MemOutOfBounds();
+            
         } catch(Overflow& error){
             std::cerr << "Error: " << str_instr << " failed because result was greater than maximum integer value that can be stored.\n";
             return;
@@ -97,6 +100,10 @@ void simulate(int32_t* mem){
             return;
         } catch(DivisionByZero& error){
             std::cerr << "Error: " << str_instr << " failed because denominator was zero, so result was undefined.\n";
+            return;
+        } catch(MemOutOfBounds& message){
+            std::cerr << "Message: Program Counter has reached the end of the memory allocated to the input hexadecimal instructions.\n";
+            return;
         }
 #ifdef DEBUG_SIMULATION
         S.print();

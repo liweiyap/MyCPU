@@ -8,5 +8,6 @@ class InvalidInput: public MyException{};
 class Overflow: public MyException{};
 class Underflow: public MyException{};
 class DivisionByZero: public MyException{};
+class MemOutOfBounds: public MyException{};
 
 #endif
