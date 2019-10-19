@@ -1,3 +1,7 @@
+/**
+ * Simulation function
+ */
+
 // uncomment this block if wishing to debug
 /*
 #ifndef DEBUG_SIMULATION
@@ -9,21 +13,48 @@
 #include "simulation.hpp"
 #endif
 
+
+/**
+ * In simulation mode, we fetch stored instructions from memory array,
+ * decode the instructions into opcode and operand,
+ * and execute corresponding stack functions.
+ *
+ * @param mem pointer to an int32_t
+ * @param n_instr total number of instructions input and stored in mem array
+ * @throws InvalidInput() exception thrown if input is invalid (e.g. not an int in the in() function)
+ * @throws Overflow() exception thrown if a value is greater than INT_MAX
+ * @throws Underflow() exception thrown if a value is smaller than INT_MIN
+ * @throws DivisionByZero() exception thrown if denominator is zero during division
+ * @throws MemOutOfBounds() exception thrown if program counter has reached the end of the memory allocated to the input instructions
+ */
 void simulate(int32_t* mem, const int n_instr){
+    // initialise empty Stack
     Stack S;
+    
+    // set program counter to address 0 of memory
     int PC = 0;
+    
+    // variables for instructions decode from memory array
     int opcode;
     int operand;
     
+    // an opcode of 1 means that the system is halted and the simulation mode is exited
     while (opcode != 1){
+        // Fetch instruction at program counter from memory.
+        // Decode instruction.
         disassembled_instr d_instr = disassemble(mem[PC]);
         opcode = d_instr.opcode;
         operand = d_instr.operand;
+        
 #ifdef DEBUG_DISASSEMBLY
         std::cout << "opcode = " << opcode << "\n";
         std::cout << "operand = " << operand << "\n";
 #endif
+        
+        // variable for knowing from which function exceptions are thrown
         std::string str_instr;
+        
+        // execute instruction
         try{
             if (opcode == 1){
                 str_instr = "hlt()";
@@ -108,12 +139,14 @@ void simulate(int32_t* mem, const int n_instr){
             std::cerr << "Message: Program Counter has reached the end of the memory allocated to the input hexadecimal instructions.\n";
             return;
         }
+        
 #ifdef DEBUG_SIMULATION
         S.print();
         std::cout << "PC = " << PC << "\n";
 #endif
-    }
+        
+    }  // end of WHILE loop for running through all instructions in memory array
     
     std::cout << "\n";
     return;
-}
+}  // end of void function for simulation
