@@ -20,6 +20,4 @@
 int ConvertCharToPositiveInt(const char text[]);
 
 
-bool IsValidHexadecimal(const char text[]);
-
 #endif
