@@ -22,7 +22,7 @@ void hlt(){
  * @param S operand stack
  * @param PC program counter
  */
-void in(Stack& S, int& PC){
+void in(Stack& S, unsigned int& PC){
     std::cout << "\nThe in() function has been called on the stack, which means that the hexadecimal of the corresponding instruction starts with '0x10'. Please input a decimal integer to proceed with the rest of the simulation:\n";
     
     // read a decimal integer value v from standard input
@@ -50,7 +50,7 @@ void in(Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void inchar(Stack& S, int& PC){
+void inchar(Stack& S, unsigned int& PC){
     std::cout << "\nThe inchar() function has been called on the stack, which means that the hexadecimal of the corresponding instruction starts with '0x11'. Please input a character to proceed with the rest of the simulation:\n";
     
     // read a character value v from standard input
@@ -69,7 +69,7 @@ void inchar(Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void out(Stack& S, int& PC){
+void out(Stack& S, unsigned int& PC){
     // pop value v from operand stack
     int v = S.peek();
     S.pop();
@@ -86,7 +86,7 @@ void out(Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void outchar(Stack& S, int& PC){
+void outchar(Stack& S, unsigned int& PC){
     // pop value v from operand stack
     char v = static_cast<char>(S.peek());
     S.pop();
@@ -105,7 +105,7 @@ void outchar(Stack& S, int& PC){
  * @throws Overflow() exception thrown if result of addition is greater than INT_MAX
  * @throws Underflow() exception thrown if result of addition is smaller than INT_MIN
  */
-void add(Stack& S, int& PC){
+void add(Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();
@@ -132,7 +132,7 @@ void add(Stack& S, int& PC){
  * @throws Overflow() exception thrown if result of subtraction is greater than INT_MAX
  * @throws Underflow() exception thrown if result of subtraction is smaller than INT_MIN
  */
-void sub(Stack& S, int& PC){
+void sub(Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();
@@ -159,7 +159,7 @@ void sub(Stack& S, int& PC){
  * @throws Overflow() exception thrown if result of multiplication is greater than INT_MAX
  * @throws Underflow() exception thrown if result of multiplication is smaller than INT_MIN
  */
-void mul(Stack& S, int& PC){
+void mul(Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();
@@ -189,7 +189,7 @@ void mul(Stack& S, int& PC){
  * @throws Overflow() exception thrown if result of division is greater than INT_MAX
  * @throws DivisionByZero() exception thrown if denominator of division is equal to zero
  */
-void div(Stack& S, int& PC){
+void div(Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();
@@ -217,7 +217,7 @@ void div(Stack& S, int& PC){
  * @throws Overflow() exception thrown if result of modulo is greater than INT_MAX
  * @throws DivisionByZero() exception thrown if denominator of division is equal to zero
  */
-void mod(Stack& S, int& PC){
+void mod(Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();
@@ -244,7 +244,7 @@ void mod(Stack& S, int& PC){
  * @param PC program counter
  * @throws Overflow() exception thrown if result of negation is greater than INT_MAX
  */
-void neg(Stack& S, int& PC){
+void neg(Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();
@@ -265,7 +265,7 @@ void neg(Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void dup(Stack& S, int& PC){
+void dup(Stack& S, unsigned int& PC){
     // pop value r from operand stack and push it back onto operand stack twice
     int r = S.peek();
     S.push(r);
@@ -280,7 +280,7 @@ void dup(Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void load(int32_t* mem, Stack& S, int& PC){
+void load(int32_t* mem, Stack& S, unsigned int& PC){
     // pop value m from operand stack
     int m = S.peek();
     S.pop();
@@ -299,7 +299,7 @@ void load(int32_t* mem, Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void store(int32_t* mem, Stack& S, int& PC){
+void store(int32_t* mem, Stack& S, unsigned int& PC){
     // pop value m from operand stack
     int m = S.peek();
     S.pop();
@@ -321,7 +321,7 @@ void store(int32_t* mem, Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void const_c(const int c, Stack& S, int& PC){
+void const_c(const int c, Stack& S, unsigned int& PC){
     // push value c onto operand stack
     S.push(c);
     
@@ -334,7 +334,7 @@ void const_c(const int c, Stack& S, int& PC){
  * @param c signed integer operand decoded from input instruction
  * @param PC program counter
  */
-void jmp_c(const int c, int& PC){
+void jmp_c(const int c, unsigned int& PC){
     // set program counter to value c
     PC = c;
 }  // end of jmp_c function
@@ -345,7 +345,7 @@ void jmp_c(const int c, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void jeq_c(const int c, Stack& S, int& PC){
+void jeq_c(const int c, Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();
@@ -366,7 +366,7 @@ void jeq_c(const int c, Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void jne_c(const int c, Stack& S, int& PC){
+void jne_c(const int c, Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();
@@ -387,7 +387,7 @@ void jne_c(const int c, Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void jls_c(const int c, Stack& S, int& PC){
+void jls_c(const int c, Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();
@@ -408,7 +408,7 @@ void jls_c(const int c, Stack& S, int& PC){
  * @param S operand stack
  * @param PC program counter
  */
-void jle_c(const int c, Stack& S, int& PC){
+void jle_c(const int c, Stack& S, unsigned int& PC){
     // pop value r from operand stack
     int r = S.peek();
     S.pop();

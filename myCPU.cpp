@@ -15,10 +15,8 @@
 #include "headers/simulation.hpp"
 #endif
 
-// TODO: tests for disassembly, stack, simulation
 // TODO: try uniqStack
 // TODO: edit README, cite catch
-// TODO: std::exceptions
 
 int main(){
     std::cout << "\nWelcome to my CPU Simulator!\n";

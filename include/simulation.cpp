@@ -32,7 +32,7 @@ void simulate(int32_t* mem, const int n_instr){
     Stack S;
     
     // set program counter to address 0 of memory
-    int PC = 0;
+    unsigned int PC = 0;
     
     // variables for instructions decode from memory array
     int opcode;

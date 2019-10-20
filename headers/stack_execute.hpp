@@ -33,7 +33,7 @@ void hlt();
  * @param S operand stack
  * @param PC program counter
  */
-void in(Stack& S, int& PC);
+void in(Stack& S, unsigned int& PC);
 
 
 /**
@@ -43,7 +43,7 @@ void in(Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void inchar(Stack& S, int& PC);
+void inchar(Stack& S, unsigned int& PC);
 
 
 /**
@@ -53,7 +53,7 @@ void inchar(Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void out(Stack& S, int& PC);
+void out(Stack& S, unsigned int& PC);
 
 
 /**
@@ -63,7 +63,7 @@ void out(Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void outchar(Stack& S, int& PC);
+void outchar(Stack& S, unsigned int& PC);
 
 
 /**
@@ -75,7 +75,7 @@ void outchar(Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void add(Stack& S, int& PC);
+void add(Stack& S, unsigned int& PC);
 
 
 /**
@@ -87,7 +87,7 @@ void add(Stack& S, int& PC);
  * @throws Overflow() exception thrown if result of subtraction is greater than INT_MAX
  * @throws Underflow() exception thrown if result of subtraction is smaller than INT_MIN
  */
-void sub(Stack& S, int& PC);
+void sub(Stack& S, unsigned int& PC);
 
 
 /**
@@ -99,7 +99,7 @@ void sub(Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void mul(Stack& S, int& PC);
+void mul(Stack& S, unsigned int& PC);
 
 
 /**
@@ -111,7 +111,7 @@ void mul(Stack& S, int& PC);
  * @throws Overflow() exception thrown if result of division is greater than INT_MAX
  * @throws DivisionByZero() exception thrown if denominator of division is equal to zero
  */
-void div(Stack& S, int& PC);
+void div(Stack& S, unsigned int& PC);
 
 
 /**
@@ -123,7 +123,7 @@ void div(Stack& S, int& PC);
  * @throws Overflow() exception thrown if result of modulo is greater than INT_MAX
  * @throws DivisionByZero() exception thrown if denominator of division is equal to zero
  */
-void mod(Stack& S, int& PC);
+void mod(Stack& S, unsigned int& PC);
 
 
 /**
@@ -134,7 +134,7 @@ void mod(Stack& S, int& PC);
  * @param PC program counter
  * @throws Overflow() exception thrown if result of negation is greater than INT_MAX
  */
-void neg(Stack& S, int& PC);
+void neg(Stack& S, unsigned int& PC);
 
 
 /**
@@ -144,7 +144,7 @@ void neg(Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void dup(Stack& S, int& PC);
+void dup(Stack& S, unsigned int& PC);
 
 
 /**
@@ -156,7 +156,7 @@ void dup(Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void load(int32_t* mem, Stack& S, int& PC);
+void load(int32_t* mem, Stack& S, unsigned int& PC);
 
 
 /**
@@ -168,7 +168,7 @@ void load(int32_t* mem, Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void store(int32_t* mem, Stack& S, int& PC);
+void store(int32_t* mem, Stack& S, unsigned int& PC);
 
 
 /**
@@ -178,7 +178,7 @@ void store(int32_t* mem, Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void const_c(const int c, Stack& S, int& PC);
+void const_c(const int c, Stack& S, unsigned int& PC);
 
 
 /**
@@ -187,7 +187,7 @@ void const_c(const int c, Stack& S, int& PC);
  * @param c signed integer operand decoded from input instruction
  * @param PC program counter
  */
-void jmp_c(const int c, int& PC);
+void jmp_c(const int c, unsigned int& PC);
 
 
 /**
@@ -199,7 +199,7 @@ void jmp_c(const int c, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void jeq_c(const int c, Stack& S, int& PC);
+void jeq_c(const int c, Stack& S, unsigned int& PC);
 
 
 /**
@@ -211,7 +211,7 @@ void jeq_c(const int c, Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void jne_c(const int c, Stack& S, int& PC);
+void jne_c(const int c, Stack& S, unsigned int& PC);
 
 
 /**
@@ -223,7 +223,7 @@ void jne_c(const int c, Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void jls_c(const int c, Stack& S, int& PC);
+void jls_c(const int c, Stack& S, unsigned int& PC);
 
 
 /**
@@ -235,7 +235,7 @@ void jls_c(const int c, Stack& S, int& PC);
  * @param S operand stack
  * @param PC program counter
  */
-void jle_c(const int c, Stack& S, int& PC);
+void jle_c(const int c, Stack& S, unsigned int& PC);
 
 
 #endif
