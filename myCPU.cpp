@@ -15,9 +15,10 @@
 #include "headers/simulation.hpp"
 #endif
 
-// TODO: tests for disassembly input etc, stack, simulation input etc
+// TODO: tests for disassembly, stack, simulation
 // TODO: try uniqStack
 // TODO: edit README
+// TODO: std::exceptions
 
 int main(){
     std::cout << "\nWelcome to my CPU Simulator!\n";
@@ -113,7 +114,7 @@ int main(){
     
 #ifdef DEBUG_MAIN
     for (int PC = 0; PC < n_instr; ++PC)
-        std::cout << std::hex << mem[PC] << "\n";
+        std::cout << "0x" << std::hex << mem[PC] << "\n";
 #endif
     
     // /////////////////////////////////////////////////////////////////////////////////
@@ -140,6 +141,7 @@ int main(){
             // fetch stored instructions from mem, decode into opcode and operand, execute corresponding stack functions.
             simulate(mem, n_instr);
         }
+        
         std::cout << "\nEnd of simulation.\n";
     }  // end IF statement for entering simulation mode
     
