@@ -149,17 +149,6 @@ int main(){
     return 0;
 }  // end of main() function
 
-
-//#ifdef DEBUG_MAIN
-//        Stack s1(6);
-//        s1.push(1); s1.push(2); s1.push(3);
-//        s1.print();
-//        Stack s2;
-//        s2.push(5); s2.push(4);
-//        s2 = s1;
-//        s1.pop(); s1.print();
-//        s2.pop(); s2.print();
-//#endif
         
 //        std::shared_ptr<Stack> s1 = std::make_shared<Stack>(6);
 //        s1->push(1); s1->push(2); s1->push(3);
