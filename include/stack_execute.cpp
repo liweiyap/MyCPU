@@ -23,6 +23,8 @@ void hlt(){
  * @param PC program counter
  */
 void in(Stack& S, int& PC){
+    std::cout << "\nThe in() function has been called on the stack, which means that the hexadecimal of the corresponding instruction starts with '0x10'. Please input a decimal integer to proceed with the rest of the simulation:\n";
+    
     // read a decimal integer value v from standard input
     char tmp_v[12];
     std::cin >> std::dec >> tmp_v;
@@ -49,6 +51,8 @@ void in(Stack& S, int& PC){
  * @param PC program counter
  */
 void inchar(Stack& S, int& PC){
+    std::cout << "\nThe inchar() function has been called on the stack, which means that the hexadecimal of the corresponding instruction starts with '0x11'. Please input a character to proceed with the rest of the simulation:\n";
+    
     // read a character value v from standard input
     char v;
     std::cin >> std::dec >> v;

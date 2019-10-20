@@ -29,13 +29,16 @@
 
 // TODO: tests for disassembly input etc, stack, simulation input etc
 // TODO: try uniqStack
-// TODO: cout << "Input mode", including for in and inchar
 // TODO: edit README
 
 int main(){
+    std::cout << "\nWelcome to my CPU Simulator!\n";
+    
     // /////////////////////////////////////////////////////////////////////////////////
     // input first command as either "disassemble" or "simulate"
     // /////////////////////////////////////////////////////////////////////////////////
+    
+    std::cout << "To start, please enter either the 'disassemble' or the 'simulate' command:\n";
     
     char cmd[12];
     std::cin >> cmd;
@@ -46,18 +49,21 @@ int main(){
             throw InvalidInput();
         }
     } catch(InvalidInput& err) {
-        std::cerr << "Invalid input: please try again. The first command must be either disassemble or simulate.\n";
+        std::string str_cmd(cmd);
+        std::cerr << "\nInvalid input '" << str_cmd << "': please try again. The first command must be either 'disassemble' or 'simulate'.\n";
         return 1;
     }
-    
-#ifdef DEBUG_MAIN
-    if (strcmp(cmd, "disassemble") == 0) std::cout << "disassemble cmd received\n";
-    if (strcmp(cmd, "simulate") == 0) std::cout << "simulate cmd received\n";
-#endif
     
     // /////////////////////////////////////////////////////////////////////////////////
     // input number of instructions as positive integer
     // /////////////////////////////////////////////////////////////////////////////////
+    
+    if (strcmp(cmd, "disassemble") == 0){
+        std::cout << "\nYou have chosen the disassembly mode. Enter the number of instructions:\n";
+    }
+    if (strcmp(cmd, "simulate") == 0){
+        std::cout << "\nYou have chosen the simulation mode. Enter the number of instructions:\n";
+    }
     
     char tmp_n_instr[11];
     std::cin >> tmp_n_instr;
@@ -66,20 +72,20 @@ int main(){
         // check that there are no inputs like '10a', 'a10', '10.0', or '-10'
         n_instr = ConvertCharToPositiveInt(tmp_n_instr);
     } catch(InvalidInput& err) {
-        std::cerr << "Invalid input: please try again. The number of instructions should be a positive integer.\n";
+        std::cerr << "\nInvalid input: please try again. The number of instructions should be a positive integer.\n";
         return 1;
     } catch(Overflow& err) {
-        std::cerr << "Invalid input: please try again. The number of instructions should be an integer between 0 and (2^31)-1 inclusive.\n";
+        std::cerr << "\nInvalid input: please try again. The number of instructions should be an integer between 0 and (2^31)-1 inclusive.\n";
         return 1;
     }
-    
-#ifdef DEBUG_MAIN
-    std::cout << n_instr << "\n";
-#endif
     
     // /////////////////////////////////////////////////////////////////////////////////
     // input all instructions
     // /////////////////////////////////////////////////////////////////////////////////
+    
+    if (n_instr != 0){
+        std::cout << "\nPlease enter all " << n_instr << " instructions, each on a separate line:\n";
+    }
     
     // dynamic memory allocation for instructions because we know n_instr only at run time rather than compile time
     int32_t* mem = new int32_t[n_instr];
@@ -106,10 +112,10 @@ int main(){
             }
 
         } catch(InvalidInput& err) {
-            std::cerr << "Invalid instruction: please input hexadecimal.\n";
+            std::cerr << "\nInvalid instruction: please input hexadecimal.\n";
             return 1;
         } catch(Overflow& error){
-            std::cerr << "Invalid instruction (integer overflow): please input hexadecimal between 0x00000000 and 0xffffffff.\n";
+            std::cerr << "\nInvalid instruction (integer overflow): please input hexadecimal between 0x00000000 and 0xffffffff.\n";
             return 1;
         }
         
@@ -127,17 +133,26 @@ int main(){
     // /////////////////////////////////////////////////////////////////////////////////
     
     if (strcmp(cmd, "disassemble") == 0){
+        std::cout << "\nCommented disassembly:\n";
+        
         for (int idx_instr = 1; idx_instr <= n_instr; ++idx_instr){
             // disassemble instruction in decimal form into opcode and operand
             // print output according to opcode (and, where appropriate, operand)
             disassembly_std_output(mem[idx_instr-1]);
-        }  // end FOR loop for decoding and outputting each instruction
+        }
+        
         std::cout << "end\n";
     }  // end IF statement for entering disassembly mode
     
-    if (strcmp(cmd, "simulate") == 0 && n_instr != 0){
-        // fetch stored instructions from mem, decode into opcode and operand, execute corresponding stack functions.
-        simulate(mem, n_instr);
+    
+    if (strcmp(cmd, "simulate") == 0){
+        if (n_instr != 0){
+            std::cout << "\nOutput of simulation:\n";
+            
+            // fetch stored instructions from mem, decode into opcode and operand, execute corresponding stack functions.
+            simulate(mem, n_instr);
+        }
+        std::cout << "\nEnd of simulation.\n";
     }  // end IF statement for entering simulation mode
     
     // free dynamically allocated memory after disassembly or simulation is complete
