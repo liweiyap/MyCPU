@@ -89,7 +89,7 @@ More test cases can be found in [`tests/myCPU_tests.cpp`](https://github.com/liw
 
 ## Compilation
 
-Compilation of `myCPU.cpp` relies on the [CMake](https://cmake.org/) build system. The code has been tested with recent versions of the [Clang](http://clang.llvm.org/docs/) C++ compiler. To compile and run, execute the following on the command line, starting in the root of the repository:
+Compilation relies on the [CMake](https://cmake.org/) build system. The code has been tested with recent versions of the [Clang](http://clang.llvm.org/docs/) C++ compiler. To compile and run, execute the following on the command line, starting in the root of the repository:
 ```
 mkdir build
 cd build
@@ -97,3 +97,17 @@ cmake ..
 make all
 ./myCPU
 ```
+
+After executing `make all`, we can also run the test cases:
+```
+./tests/myCPU_tests
+```
+
+## Credits
+
+Full credits for the header file [`headers/catch.hpp`](https://github.com/liweiyap/MyCPU/blob/master/headers/catch.hpp) go to the authors of [Catch2](https://github.com/catchorg/Catch2). This allows for easy testing in [`tests/myCPU_tests.cpp`](https://github.com/liweiyap/MyCPU/blob/master/tests/myCPU_tests.cpp) by using a header-only library.
+
+This repository was inspired by a coursework from a prerequisite course called Informatik I in the first semester of my master's studies in computational biology. The lecturer of this course was [Prof. Felix Friedrich](http://people.inf.ethz.ch/felixf/index.html).
+
+## Future work
+* See if it is possible to replace raw pointers with smart pointers in the header file [`headers/stack.hpp`](https://github.com/liweiyap/MyCPU/blob/master/headers/stack.hpp).

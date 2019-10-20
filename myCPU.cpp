@@ -15,8 +15,6 @@
 #include "headers/simulation.hpp"
 #endif
 
-// TODO: try uniqStack
-// TODO: edit README, cite catch
 
 int main(){
     std::cout << "\nWelcome to my CPU Simulator!\n";
@@ -146,12 +144,3 @@ int main(){
     
     return 0;
 }  // end of main() function
-
-        
-//        std::shared_ptr<Stack> s1 = std::make_shared<Stack>(6);
-//        s1->push(1); s1->push(2); s1->push(3);
-//        s1->print();
-//        std::shared_ptr<Stack> s2 = std::make_shared<Stack>();
-//        s2 = s1;
-//        s1->pop(); s1->print();
-//        s2->pop(); s2->print();
