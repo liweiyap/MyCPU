@@ -46,8 +46,21 @@ disassembled_instr disassemble(int instr);
 /**
  * Disassemble instruction in decimal form into opcode and operand.
  * Print output according to opcode (and, where appropriate, operand).
+ *
+ * @param int instruction already converted beforehand from hexadecimal to decimal form
  */
 void disassembly_std_output(int instr);
+
+
+/**
+ * Disassemble set of instructions stored in memory array in decimal form
+ * into opcode and operand.
+ * Print output according to opcode (and, where appropriate, operand).
+ *
+ * @param mem pointer to an int32_t
+ * @param n_instr total number of instructions input and stored in mem array
+ */
+void disassembly_std_output(int32_t* mem, const int n_instr);
 
 
 #endif

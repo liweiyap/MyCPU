@@ -1,7 +1,8 @@
 include_directories("${PROJECT_SOURCE_DIR}/headers")
 
+add_library(catch catch.cpp)
+
 set(TESTS
-    catch
     sample
 )
 
@@ -13,4 +14,5 @@ foreach(TEST ${TESTS})
     target_link_libraries(${TEST} stack)
     target_link_libraries(${TEST} stack_execute)
     target_link_libraries(${TEST} simulation)
+    target_link_libraries(${TEST} catch)
 endforeach()

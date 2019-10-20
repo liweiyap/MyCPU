@@ -43,6 +43,8 @@ disassembled_instr disassemble(int instr){
 /**
  * Disassemble instruction in decimal form into opcode and operand.
  * Print output according to opcode (and, where appropriate, operand).
+ *
+ * @param int instruction already converted beforehand from hexadecimal to decimal form
  */
 void disassembly_std_output(int instr){
     disassembled_instr d_instr = disassemble(instr);
@@ -76,3 +78,20 @@ void disassembly_std_output(int instr){
     else if (opcode == 44) std::cout << "jle " << std::dec << operand << "\n";
     else std::cout << "data 0x" << std::hex << instr << "\n";
 }  // end of disassembly_std_output void function
+
+
+/**
+ * Disassemble set of instructions stored in memory array in decimal form
+ * into opcode and operand.
+ * Print output according to opcode (and, where appropriate, operand).
+ *
+ * @param mem pointer to an int32_t
+ * @param n_instr total number of instructions input and stored in mem array
+ */
+void disassembly_std_output(int32_t* mem, const int n_instr){
+    for (int idx_instr = 1; idx_instr <= n_instr; ++idx_instr){
+        disassembly_std_output(mem[idx_instr-1]);
+    }
+    
+    std::cout << "end\n";
+}

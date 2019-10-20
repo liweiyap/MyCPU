@@ -17,7 +17,7 @@
 
 // TODO: tests for disassembly, stack, simulation
 // TODO: try uniqStack
-// TODO: edit README
+// TODO: edit README, cite catch
 // TODO: std::exceptions
 
 int main(){
@@ -124,13 +124,11 @@ int main(){
     if (strcmp(cmd, "disassemble") == 0){
         std::cout << "\nCommented disassembly:\n";
         
-        for (int idx_instr = 1; idx_instr <= n_instr; ++idx_instr){
-            // disassemble instruction in decimal form into opcode and operand
-            // print output according to opcode (and, where appropriate, operand)
-            disassembly_std_output(mem[idx_instr-1]);
-        }
+        // disassemble instruction in decimal form into opcode and operand
+        // print output according to opcode (and, where appropriate, operand)
+        disassembly_std_output(mem, n_instr);
         
-        std::cout << "end\n";
+        std::cout << "\nEnd of disassembly.\n";
     }  // end IF statement for entering disassembly mode
     
     
