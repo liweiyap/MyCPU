@@ -13,10 +13,6 @@
 #include "std_input_parser.hpp"
 #endif
 
-#ifndef EXCEPTIONS
-#include "exceptions.hpp"
-#endif
-
 
 /**
  * converts an array of characters between '0' and '9' inclusive to a single positive integer

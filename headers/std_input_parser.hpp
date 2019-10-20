@@ -6,6 +6,10 @@
 #define STD_INPUT_PARSER
 #pragma once
 
+#ifndef EXCEPTIONS
+#include "exceptions.hpp"
+#endif
+
 #include <iostream>
 
 
