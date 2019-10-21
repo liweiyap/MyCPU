@@ -1,3 +1,7 @@
+/*
+ list of some test cases
+ */
+
 #ifndef TEST_HELPER
 #include "test_helper.hpp"
 #endif
@@ -127,12 +131,3 @@ TEST_CASE("stack", "sample_test"){
     // restore the respective pointers of standard output and input
     std::cout.rdbuf(cout_old);
 }  // end of "stack" TEST_CASE
-
-
-//        std::shared_ptr<Stack> s1 = std::make_shared<Stack>(6);
-//        s1->push(1); s1->push(2); s1->push(3);
-//        s1->print();
-//        std::shared_ptr<Stack> s2 = std::make_shared<Stack>();
-//        s2 = s1;
-//        s1->pop(); s1->print();
-//        s2->pop(); s2->print();

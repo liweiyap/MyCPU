@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cassert>
 #include <algorithm>  // remove, swap
+#include <memory>     // shared_ptr
 
 
 /**
@@ -22,10 +23,10 @@ struct Node{
     Node(int v): value(v), next(0){}
     
     // Inline constructor for Node object that points to another Node
-    Node(int v, Node* n): value(v), next(n){}
+    Node(int v, std::shared_ptr<Node> n): value(v), next(n){}
 
     int value;
-    Node* next;
+    std::shared_ptr<Node> next;
 };  // end of Node struct definition
 
 
@@ -38,25 +39,13 @@ public:
     Stack();
     
     
-    // Constructor for Stack containing a single Node
-    Stack(Node* node);
-    
-    
     // Constructor for Stack containing a single Node to be created for storing integer value
     Stack(int v);
-    
-    
-    // Copy constructor
-    Stack(const Stack& s);
     
     
     // Create new Node storing integer value.
     // Add said Node to top of Stack.
     void push(int v);
-    
-    
-    // Add Node to top of Stack
-    void push(Node* node);
     
     
     // Remove Node from top of Stack. Delete Node.
@@ -79,10 +68,6 @@ public:
     void print();
     
     
-    // Assignment operator
-    Stack& operator=(const Stack& s);
-    
-    
     // Remove all Nodes from Stack. Delete all Nodes.
     void clear();
     
@@ -92,7 +77,7 @@ public:
     
     
 private:
-    Node* top;
+    std::shared_ptr<Node> top;
     
     int n_nodes;
 };  // end of Stack class definition
