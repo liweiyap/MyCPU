@@ -94,7 +94,7 @@ int main(){
             // account for hexadecimals that might represent negative integers
             // 2^32 - 1 = (2^31 - 1) * 2 + 1
             // if input is greater than 0xffffffff, overflow has occurred.
-            if (instr > static_cast<long>(std::numeric_limits<int>::max()) * 2 + 1){
+            if (instr > static_cast<long>(std::numeric_limits<int32_t>::max()) * 2 + 1){
                 throw Overflow();
             }
 

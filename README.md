@@ -110,4 +110,4 @@ Full credits for the header file [`headers/catch.hpp`](https://github.com/liweiy
 This repository was inspired by a coursework from a prerequisite course called Informatik I in the first semester of my master's studies in computational biology. The lecturer of this course was [Prof. Felix Friedrich](http://people.inf.ethz.ch/felixf/index.html).
 
 ## Future work
-* See if it is possible to replace raw pointers with smart pointers in the header file [`headers/stack.hpp`](https://github.com/liweiyap/MyCPU/blob/master/headers/stack.hpp).
+* Would be nice to come up with a set of hexadecimal instructions to simulate calculation of factorial.
