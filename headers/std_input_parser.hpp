@@ -11,6 +11,7 @@
 #endif
 
 #include <iostream>
+#include <limits>    // numeric_limits
 
 
 /**

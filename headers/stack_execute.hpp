@@ -19,6 +19,9 @@
 #include "std_input_parser.hpp"
 #endif
 
+#include <iterator>   // begin
+#include <ios>        // dec, hex, streamsize
+
 
 /**
  * Halt the system (exit the simulator).

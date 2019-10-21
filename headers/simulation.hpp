@@ -14,6 +14,8 @@
 #include "stack_execute.hpp"
 #endif
 
+#include <string>
+
 
 /**
  * In simulation mode, we fetch stored instructions from memory array,

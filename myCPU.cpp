@@ -15,6 +15,8 @@
 #include "headers/simulation.hpp"
 #endif
 
+#include <cstring>  // strcmp
+
 
 int main(){
     std::cout << "\nWelcome to my CPU Simulator!\n";

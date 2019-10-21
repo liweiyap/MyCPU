@@ -8,6 +8,8 @@
 #pragma once
 
 #include <iostream>
+#include <cassert>
+#include <algorithm>  // remove, swap
 
 
 /**

@@ -119,6 +119,7 @@ TEST_CASE("stack", "sample_test"){
     Stack s2;
     s2.push(5); s2.push(4);
     s2 = s1;
+    s1.pop();  // test assignment operator
     s2.pop(); s2.print();
     
     REQUIRE( buffer.str() == "[ 2 -> 1 -> 6 ]\n" );

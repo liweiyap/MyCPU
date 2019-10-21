@@ -10,7 +10,8 @@
 #include "simulation.hpp"
 #endif
 
-#include <sstream>
+#include <sstream>    // istringstream, ostringstream
+#include <streambuf>  // streambuf
 
 
 /**

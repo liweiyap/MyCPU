@@ -13,8 +13,9 @@
 #endif
  */
 
-#include <cmath>
+#include <cmath>     // pow
 #include <iostream>
+#include <ios>       // dec, hex, streamsize
 
 
 /**
