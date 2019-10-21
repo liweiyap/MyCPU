@@ -1,7 +1,7 @@
 ## Introduction
 
 [`myCPU.cpp`](https://github.com/liweiyap/MyCPU/blob/master/myCPU.cpp) contains the `main()` function for simulating a stack-based CPU. The CPU contains an operand stack and a register, and it also has access to memory.
-* The stack is used to store the results of computations during the processing of machine instructions. It is implemented as a FIFO object in the header file [`headers/stack.hpp`](https://github.com/liweiyap/MyCPU/blob/master/headers/stack.hpp).
+* The stack is used to store the results of computations during the processing of machine instructions. It is implemented as a LIFO object in the header file [`headers/stack.hpp`](https://github.com/liweiyap/MyCPU/blob/master/headers/stack.hpp).
 * The register acts as a Program Counter (PC) that points to the address of the next machine instruction to be executed. It is implemented as an `unsigned int` in the helper file [`include/simulation.cpp`](https://github.com/liweiyap/MyCPU/blob/master/include/simulation.cpp).
 * Machine instructions to be processed are first stored in a contiguous array in the memory. Each instruction is 32 bits wide; the first eight bits are the opcode and the last 24 bits are the operand that will eventually be stored on the stack. Each opcode will call one of the functions in the helper file [`include/stack_execute.cpp`](https://github.com/liweiyap/MyCPU/blob/master/include/stack_execute.cpp), which will execute a computation through the manipulation of the stack. The results of some of the computations may be written to the standard output until the final machine instruction is processed.
 

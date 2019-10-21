@@ -28,7 +28,7 @@ struct Node{
 
 
 /**
- * FIFO object used to simulate a virtual CPU.
+ * LIFO object used to simulate a virtual CPU.
  */
 class Stack{
 public:

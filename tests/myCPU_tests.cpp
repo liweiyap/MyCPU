@@ -15,9 +15,9 @@ TEST_CASE("disassemble"){
     SECTION("Hello_world"){
         int n_instr = 23;
         
-        std::istringstream iss("0x32000064 0x3200006c 0x32000072 0x3200006f 0x32000077 0x32000020 0x3200006f 0x3200006c 0x3200006c 0x32000065 0x32000048 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x1000000");
+        std::istringstream iss("0x32000048 0x13000000 0x32000065 0x13000000 0x3200006c 0x13000000 0x3200006c 0x13000000 0x3200006f 0x13000000 0x32000020 0x13000000 0x32000077 0x13000000 0x3200006f 0x13000000 0x32000072 0x13000000 0x3200006c 0x13000000 0x32000064 0x13000000 0x1000000");
         
-        REQUIRE( general_test(disassembly_std_output, iss, n_instr) == "const 100\nconst 108\nconst 114\nconst 111\nconst 119\nconst 32\nconst 111\nconst 108\nconst 108\nconst 101\nconst 72\noutchar\noutchar\noutchar\noutchar\noutchar\noutchar\noutchar\noutchar\noutchar\noutchar\noutchar\nhlt\nend\n" );
+        REQUIRE( general_test(disassembly_std_output, iss, n_instr) == "const 72\noutchar\nconst 101\noutchar\nconst 108\noutchar\nconst 108\noutchar\nconst 111\noutchar\nconst 32\noutchar\nconst 119\noutchar\nconst 111\noutchar\nconst 114\noutchar\nconst 108\noutchar\nconst 100\noutchar\nhlt\nend\n" );
     }  // end of "Hello_world" section
     
     
@@ -64,7 +64,7 @@ TEST_CASE("simulate"){
     SECTION("Hello_world"){
         int n_instr = 23;
         
-        std::istringstream iss("0x32000064 0x3200006c 0x32000072 0x3200006f 0x32000077 0x32000020 0x3200006f 0x3200006c 0x3200006c 0x32000065 0x32000048 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x13000000 0x1000000");
+        std::istringstream iss("0x32000048 0x13000000 0x32000065 0x13000000 0x3200006c 0x13000000 0x3200006c 0x13000000 0x3200006f 0x13000000 0x32000020 0x13000000 0x32000077 0x13000000 0x3200006f 0x13000000 0x32000072 0x13000000 0x3200006c 0x13000000 0x32000064 0x13000000 0x1000000");
         
         REQUIRE( general_test(simulate, iss, n_instr) == "Hello world\n" );
     }  // end of "Hello_world" section
