@@ -89,7 +89,12 @@ More test cases can be found in [`tests/myCPU_tests.cpp`](https://github.com/liw
 
 ## Compilation
 
-Compilation relies on the [CMake](https://cmake.org/) build system. The code has been tested with recent versions of the [Clang](http://clang.llvm.org/docs/) C++ compiler. To compile and run, execute the following on the command line, starting in the root of the repository:
+To create a local copy of this repository, simply click 'Download'. Alternatively, clone it by first navigating to the path you want to store the local copy and then executing the following on the command line:
+```
+git clone git@github.com:liweiyap/MyCPU.git
+```
+
+Compilation relies on the [CMake](https://cmake.org/) build system. The code has been tested with recent versions of the [Clang](http://clang.llvm.org/docs/) C++ compiler. To compile and run, execute the following **in the root of the repository**:
 ```
 mkdir build
 cd build
