@@ -120,12 +120,10 @@ TEST_CASE("stack", "sample_test"){
     REQUIRE( buffer.str() == "[ 3 -> 2 -> 1 -> 6 ]\n" );
     buffer.str("");
     
-    Stack s2;
-    s2.push(5); s2.push(4);
-    s2 = s1;
-    s1.pop();  // test assignment operator
-    s2.pop(); s2.print();
-    
+    REQUIRE( s1.size() == 4 );
+    s1.pop();
+    REQUIRE( s1.size() == 3 );
+    s1.print();
     REQUIRE( buffer.str() == "[ 2 -> 1 -> 6 ]\n" );
     
     // restore the respective pointers of standard output and input

@@ -12,7 +12,7 @@
  *
  * @return empty Stack
  */
-Stack::Stack(): top(0), n_nodes(0){}
+Stack::Stack(){}
 
 
 /**
@@ -21,7 +21,7 @@ Stack::Stack(): top(0), n_nodes(0){}
  * @param v integer value for creating new Node object at top of Stack to be created
  * @return Stack with a single Node
  */
-Stack::Stack(int v): top(std::make_shared<Node>(v)), n_nodes(1){}
+Stack::Stack(int v): top(std::make_unique<Node>(v)), n_nodes(1){}
 
 
 /**
@@ -31,8 +31,8 @@ Stack::Stack(int v): top(std::make_shared<Node>(v)), n_nodes(1){}
  * @param v integer value for creating new Node to be pushed onto Stack
  */
 void Stack::push(int v){
-    std::shared_ptr<Node> node = std::make_shared<Node>(v, top);
-    top = node;
+    std::unique_ptr<Node> node = std::make_unique<Node>(v, std::move(top));
+    top = std::move(node);
     ++n_nodes;
 }  // end of push function
 
@@ -42,8 +42,7 @@ void Stack::push(int v){
  */
 void Stack::pop(){
     assert(!isEmpty() && "Error: pop() failed because stack is empty.");
-    std::shared_ptr<Node> node = top;
-    top = top->next;
+    top = std::move(top->next);
     --n_nodes;
 }  // end of pop function
 
@@ -84,11 +83,11 @@ bool Stack::isEmpty(){
  */
 void Stack::print(){
     std::cout << "[ ";
-    std::shared_ptr<Node> node = top;
-    while (node){                             // while node != 0
-        std::cout << node->value;
-        if (node->next) std::cout << " -> ";  // if node->next != 0
-        node = node->next;
+    std::unique_ptr<Node>* node = &top;
+    while (*node){                             // while node != 0
+        std::cout << (*node)->value;
+        if ((*node)->next) std::cout << " -> ";  // if node->next != 0
+        node = &(*node)->next;
     }
     std::cout << " ]\n";
 }  // end of print function

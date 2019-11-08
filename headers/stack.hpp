@@ -10,24 +10,7 @@
 #include <iostream>
 #include <cassert>
 #include <algorithm>  // remove, swap
-#include <memory>     // shared_ptr
-
-
-/**
- * Node object acts as building block for larger Stack object.
- * Each Node contains two attributes: its own value [int] and a pointer
- * that points either to NULL or the next Node in the same Stack.
- */
-struct Node{
-    // Inline constructor for stand-alone Node
-    Node(int v): value(v), next(0){}
-    
-    // Inline constructor for Node object that points to another Node
-    Node(int v, std::shared_ptr<Node> n): value(v), next(n){}
-
-    int value;
-    std::shared_ptr<Node> next;
-};  // end of Node struct definition
+#include <memory>     // unique_ptr
 
 
 /**
@@ -77,9 +60,25 @@ public:
     
     
 private:
-    std::shared_ptr<Node> top;
+    /**
+     * Node object acts as building block for larger Stack object.
+     * Each Node contains two attributes: its own value [int] and a pointer
+     * that points either to NULL or the next Node in the same Stack.
+     */
+    struct Node{
+        // Inline constructor for stand-alone Node
+        Node(int v): value(v){}
+        
+        // Inline constructor for Node object that points to another Node
+        Node(int v, std::unique_ptr<Node> n): value(v), next(std::move(n)){}
+
+        int value;
+        std::unique_ptr<Node> next;
+    };  // end of Node struct definition
     
-    int n_nodes;
+    std::unique_ptr<Node> top;
+    
+    int n_nodes = 0;
 };  // end of Stack class definition
 
 #endif
