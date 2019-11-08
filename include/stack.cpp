@@ -32,6 +32,9 @@ Stack::Stack(int v): top(std::make_unique<Node>(v)), n_nodes(1){}
  */
 void Stack::push(int v){
     std::unique_ptr<Node> node = std::make_unique<Node>(v, std::move(top));
+#ifdef DEBUG_STACK
+    if (!top) std::cout << "top is now nullptr\n";
+#endif
     top = std::move(node);
     ++n_nodes;
 }  // end of push function
@@ -64,6 +67,7 @@ int Stack::peek(){
  * @return number of Nodes in Stack
  */
 int Stack::size(){
+    assert(n_nodes >= 0);
     return n_nodes;
 }  // end of size function
 
@@ -97,9 +101,8 @@ void Stack::print(){
  * Remove all Nodes from Stack. Delete all Nodes.
  */
 void Stack::clear(){
-    while (!isEmpty()){
-        pop();
-    }
+    top.reset();
+    n_nodes = 0;
 }  // end of clear function
 
 

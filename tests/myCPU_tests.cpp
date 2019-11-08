@@ -115,6 +115,7 @@ TEST_CASE("stack", "sample_test"){
     
     Stack s1(6);
     s1.push(1); s1.push(2); s1.push(3);
+    REQUIRE( s1.peek() == 3 );
     s1.print();
     
     REQUIRE( buffer.str() == "[ 3 -> 2 -> 1 -> 6 ]\n" );
@@ -125,6 +126,12 @@ TEST_CASE("stack", "sample_test"){
     REQUIRE( s1.size() == 3 );
     s1.print();
     REQUIRE( buffer.str() == "[ 2 -> 1 -> 6 ]\n" );
+    buffer.str("");
+    
+    s1.clear();
+    REQUIRE( s1.size() == 0 );
+    s1.print();
+    REQUIRE( buffer.str() == "[  ]\n" );
     
     // restore the respective pointers of standard output and input
     std::cout.rdbuf(cout_old);

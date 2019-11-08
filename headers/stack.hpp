@@ -7,6 +7,13 @@
 #define STACK_H
 #pragma once
 
+// uncomment this block if wishing to debug
+/*
+#ifndef DEBUG_STACK
+#define DEBUG_STACK
+#endif
+ */
+
 #include <iostream>
 #include <cassert>
 #include <algorithm>  // remove, swap
