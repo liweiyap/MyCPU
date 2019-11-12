@@ -18,6 +18,7 @@
 #include <cassert>
 #include <algorithm>  // remove, swap
 #include <memory>     // unique_ptr
+#include <utility>    // move
 
 
 /**
