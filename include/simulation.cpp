@@ -35,7 +35,7 @@ void simulate(int32_t* mem, const int n_instr){
     unsigned int PC = 0;
     
     // variables for instructions decode from memory array
-    int opcode;
+    int opcode = 0;
     int operand;
     
     // an opcode of 1 means that the system is halted and the simulation mode is exited
