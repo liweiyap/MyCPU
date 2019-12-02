@@ -37,7 +37,7 @@ void Stack::push(int v){
 #endif
     top = std::move(node);
     ++n_nodes;
-}  // end of push function
+}
 
 
 /**
@@ -47,7 +47,7 @@ void Stack::pop(){
     assert(!isEmpty() && "Error: pop() failed because stack is empty.");
     top = std::move(top->next);
     --n_nodes;
-}  // end of pop function
+}
 
 
 /**
@@ -58,7 +58,7 @@ void Stack::pop(){
 int Stack::peek(){
     assert(!isEmpty() && "Error: peek() failed because stack is empty.");
     return top->value;
-}  // end of peek function
+}
 
 
 /**
@@ -69,7 +69,7 @@ int Stack::peek(){
 int Stack::size(){
     assert(n_nodes >= 0);
     return n_nodes;
-}  // end of size function
+}
 
 
 /**
@@ -79,7 +79,7 @@ int Stack::size(){
  */
 bool Stack::isEmpty(){
     return !top;  // return top == 0
-}  // end of isEmpty function
+}
 
 
 /**
@@ -88,13 +88,13 @@ bool Stack::isEmpty(){
 void Stack::print(){
     std::cout << "[ ";
     std::unique_ptr<Node>* node = &top;
-    while (*node){                             // while node != 0
+    while (*node){                               // while node != 0
         std::cout << (*node)->value;
         if ((*node)->next) std::cout << " -> ";  // if node->next != 0
         node = &(*node)->next;
     }
     std::cout << " ]\n";
-}  // end of print function
+}
 
 
 /**
@@ -103,7 +103,7 @@ void Stack::print(){
 void Stack::clear(){
     top.reset();
     n_nodes = 0;
-}  // end of clear function
+}
 
 
 /**
@@ -111,4 +111,4 @@ void Stack::clear(){
  */
 Stack::~Stack(){
     clear();
-}  // end of destructor
+}

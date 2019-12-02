@@ -28,20 +28,13 @@
  * @throws MemOutOfBounds() exception thrown if program counter has reached the end of the memory allocated to the input instructions
  */
 void simulate(int32_t* mem, const int n_instr){
-    // initialise empty Stack
     Stack S;
-    
-    // set program counter to address 0 of memory
     unsigned int PC = 0;
-    
-    // variables for instructions decode from memory array
     int opcode = 0;
     int operand;
     
     // an opcode of 1 means that the system is halted and the simulation mode is exited
     while (opcode != 1){
-        // Fetch instruction at program counter from memory.
-        // Decode instruction.
         disassembled_instr d_instr = disassemble(mem[PC]);
         opcode = d_instr.opcode;
         operand = d_instr.operand;
@@ -54,7 +47,6 @@ void simulate(int32_t* mem, const int n_instr){
         // variable for knowing from which function exceptions are thrown
         std::string str_instr;
         
-        // execute instruction
         try{
             if (opcode == 1){
                 str_instr = "hlt()";
@@ -149,4 +141,4 @@ void simulate(int32_t* mem, const int n_instr){
     
     std::cout << "\n";
     return;
-}  // end of void function for simulation
+}

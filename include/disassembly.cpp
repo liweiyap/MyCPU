@@ -37,7 +37,7 @@ disassembled_instr disassemble(int instr){
     int operand = instr;
     
     return disassembled_instr{opcode, operand};
-}  // end of disassemble function
+}
 
 
 /**
@@ -77,7 +77,7 @@ void disassembly_std_output(int instr){
     else if (opcode == 43) std::cout << "jls " << std::dec << operand << "\n";
     else if (opcode == 44) std::cout << "jle " << std::dec << operand << "\n";
     else std::cout << "data 0x" << std::hex << instr << "\n";
-}  // end of disassembly_std_output void function
+}
 
 
 /**

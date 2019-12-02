@@ -36,4 +36,4 @@ int ConvertCharToPositiveInt(const char* text){
     }
     
     return number;
-}  // end of function
+}
